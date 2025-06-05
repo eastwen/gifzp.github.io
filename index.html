@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GIF作品集</title>
     <style>
+        /* 基础样式 */
         * {
             margin: 0;
             padding: 0;
@@ -12,132 +13,134 @@
         }
         
         body {
-            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
-            line-height: 1.6;
-            color: #fff;
+            font-family: 'Arial', sans-serif;
             background-color: #000;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 100vw;
-            margin: 0 auto;
-        }
-        
-        header {
-            text-align: center;
-            padding: 20px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 100;
-        }
-        
-        header h1 {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
             color: #fff;
+            line-height: 1.6;
         }
         
-        header p {
-            font-size: 1.1rem;
+        /* 页眉样式 */
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
             color: #aaa;
+        }
+        
+        /* 主要内容区域 */
+        main {
+            max-width: 1400px;
+            margin: 100px auto 40px;
+            padding: 20px;
+        }
+        
+        /* 作品集样式 */
+        .portfolio-container {
+            margin-top: 40px;
         }
         
         .portfolio-items {
-            padding-top: 100px; /* 为固定的header留出空间 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         
         .portfolio-item {
+            margin: 10px 0;
             width: 100%;
             display: flex;
             justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            margin: 10px 0; /* 添加上下间距 */
+            min-height: 100vh;
         }
         
         .portfolio-image {
-            width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
+            width: 100%;
+            height: 100vh;
         }
         
         .portfolio-image img {
-            min-width: 1400px; /* 设置最小宽度为1400px */
             max-width: 100%;
-            max-height: calc(100vh - 20px); /* 减去上下间距 */
+            max-height: calc(100vh - 20px);
             object-fit: contain;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 20px 0;
-            color: #aaa;
-            font-size: 0.9rem;
-            background-color: #000;
+            min-width: 1400px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
+    <header>
+        <div class="header-content">
             <h1>GIF作品集</h1>
-            <p>精选动态图像作品展示</p>
-        </header>
-        
-        <div class="portfolio-items" id="portfolioItems">
-            <!-- 作品项目将通过JavaScript动态添加 -->
+            <p class="subtitle">动态图像设计</p>
         </div>
-        
-        <footer>
-            <p>&copy; 2023 GIF作品集. 保留所有权利。</p>
-        </footer>
-    </div>
+    </header>
+    
+    <main>
+        <div class="portfolio-container">
+            <div class="portfolio-items" id="portfolioItems">
+                <!-- 作品项将通过JavaScript动态加载 -->
+            </div>
+        </div>
+    </main>
     
     <script>
+        // 获取作品集容器
+        const portfolioItems = document.getElementById('portfolioItems');
+        
         // 图片文件列表
         const imageFiles = [
-            "013n0diowpjwhw0pxoim3v3236.gif",
-            "016g34aghkjxrb49nbzcew3738.gif",
-            "01av1964vtw7arkxcdo24f3937.gif",
-            "01azngxi94vhrxbd9ja9dw3032.gif",
-            "01evjhyz1wj4kmovo18eju3839.gif",
-            "01k5rc8qpr9ngrtg5btwnl3532.gif",
-            "01ndynvdokolaqzvpvxfnj3535.gif",
-            "01osfm1ku9iwmch2fs0kqb3635.gif",
-            "01paqbjlndcg4xr19xntef3232.gif",
-            "01r5chjtjcmfqzotvxput63933.gif",
-            "01tdse3qvyktsmdfwuyt2q3430.gif",
-            "01tozcu62exwyqnpzk1xsr3133.gif",
-            "01ubvdh2cuq6ci9m3kw14m3232.gif",
-            "01uduy6mvyfymn5lrosta13235.gif",
-            "01v3nfuwtnq0kzl452637i3430.gif",
-            "01xtkgtlb1r750envn2q1d3232.gif",
-            "01xv8eqfbtg9uktgfh8yli3534.gif",
-            "683068d86c22db5c6tqg6f2327.gif",
-            "683068d87d53f6t6ar7cj67301.gif",
-            "683068d87ec2bbnzicde951894.gif",
-            "683068d87f7e8j2m1qf16w2660 (1).gif",
-            "683068d880c171r2xc28vn7286.gif",
-            "683068d880e29k0pbrho025122.gif",
-            "683068d8810e859khj75j06502.gif",
-            "683068d890158966aewf0e7732.gif",
-            "683068d8929c2zs9juj28q7522.gif"
+            '013n0diowpjwhw0pxoim3v3236.gif',
+            '016g34aghkjxrb49nbzcew3738.gif',
+            '01av1964vtw7arkxcdo24f3937.gif',
+            '01azngxi94vhrxbd9ja9dw3032.gif',
+            '01evjhyz1wj4kmovo18eju3839.gif',
+            '01k5rc8qpr9ngrtg5btwnl3532.gif',
+            '01ndynvdokolaqzvpvxfnj3535.gif',
+            '01osfm1ku9iwmch2fs0kqb3635.gif',
+            '01paqbjlndcg4xr19xntef3232.gif',
+            '01r5chjtjcmfqzotvxput63933.gif',
+            '01tdse3qvyktsmdfwuyt2q3430.gif',
+            '01tozcu62exwyqnpzk1xsr3133.gif',
+            '01ubvdh2cuq6ci9m3kw14m3232.gif',
+            '01uduy6mvyfymn5lrosta13235.gif',
+            '01v3nfuwtnq0kzl452637i3430.gif',
+            '01xtkgtlb1r750envn2q1d3232.gif',
+            '01xv8eqfbtg9uktgfh8yli3534.gif',
+            '683068d86c22db5c6tqg6f2327.gif',
+            '683068d87d53f6t6ar7cj67301.gif',
+            '683068d87ec2bbnzicde951894.gif',
+            '683068d87f7e8j2m1qf16w2660 (1).gif',
+            '683068d880c171r2xc28vn7286.gif',
+            '683068d880e29k0pbrho025122.gif',
+            '683068d8810e859khj75j06502.gif',
+            '683068d890158966aewf0e7732.gif',
+            '683068d8929c2zs9juj28q7522.gif'
         ];
         
-        // 初始化页面
-        document.addEventListener('DOMContentLoaded', () => {
-            // 加载所有图片
-            loadImages();
-        });
-        
-        // 加载图片
-        function loadImages() {
-            const portfolioItems = document.getElementById('portfolioItems');
+        // 加载作品集
+        window.onload = function() {
             portfolioItems.innerHTML = '';
             
             // 创建图片元素
@@ -147,7 +150,7 @@
                 
                 portfolioItem.innerHTML = `
                     <div class="portfolio-image">
-                        <img src="images/${imageFile}" alt="GIF作品" onerror="this.src='images/placeholder.svg'">
+                        <img src="images/${imageFile}" alt="GIF作品">
                     </div>
                 `;
                 
